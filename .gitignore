@@ -13,4 +13,4 @@ dist
 /.project
 /RUNNING_PID
 /.settings
-.application_local.conf
+application_local.conf

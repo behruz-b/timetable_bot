@@ -15,8 +15,8 @@ public class BotInitializer extends TelegramLongPollingBot {
   private final String botToken;
   private final String httpLink;
   private long chat_id;
-  String lastMessage;
-  String request;
+  String lastMessage = "";
+  String request = "";
   ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
 
   public BotInitializer(final String botUserName, final String botToken, final String httpLink) {
@@ -32,7 +32,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     if (update.hasMessage() && update.getMessage().hasText()) {
 
       update.getUpdateId();
-      SendMessage message = new SendMessage().setChatId(update.getMessage().getChatId());
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
 
       chat_id = update.getMessage().getChatId();
       String message_text = update.getMessage().getText();
@@ -106,6 +106,7 @@ public class BotInitializer extends TelegramLongPollingBot {
       return "Menu tanlang...";
     }
     if (msg.equals("Bo'sh xonalar")) {
+      lastMessage = "";
       keyboard.clear();
       request = msg;
       keyboardFirstRow.clear();

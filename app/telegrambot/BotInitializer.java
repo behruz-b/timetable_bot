@@ -17,7 +17,6 @@ public class BotInitializer extends TelegramLongPollingBot {
   private long chat_id;
   String lastMessage;
   String request;
-
   ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
 
   public BotInitializer(final String botUserName, final String botToken, final String httpLink) {

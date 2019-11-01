@@ -27,8 +27,13 @@ val akkaHttp = Seq(
 libraryDependencies ++= akkaLibs ++ akkaHttp ++ Seq( jdbc , ehcache , ws , specs2 % Test , guice,
   "org.apache.logging.log4j" % "log4j-api" % "2.12.1",
   "org.telegram" % "telegrambots" % "4.4.0.1",
+  "io.github.bonigarcia" % "webdrivermanager" % "3.7.1",
+  "org.seleniumhq.selenium" % "selenium-java" % "4.0.0-alpha-3",
   "org.scalaj" % "scalaj-http_2.12" % "2.3.0")
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
+
+
+
+unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/Test" )
 
       

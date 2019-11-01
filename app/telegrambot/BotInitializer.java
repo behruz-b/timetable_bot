@@ -1,13 +1,19 @@
 package telegrambot;
-
+import org.openqa.selenium.WebDriver;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 public class BotInitializer extends TelegramLongPollingBot {
 
@@ -18,6 +24,7 @@ public class BotInitializer extends TelegramLongPollingBot {
   String lastMessage = "";
   String request = "";
   ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+  static WebDriver driver;
 
   public BotInitializer(final String botUserName, final String botToken, final String httpLink) {
     this.botUserName = botUserName;
@@ -110,7 +117,8 @@ public class BotInitializer extends TelegramLongPollingBot {
       keyboard.clear();
       request = msg;
       keyboardFirstRow.clear();
-      return "Bo'sh xonalar";
+      getImages(chat_id);
+      return "Hozirda bo'sh xonalar";
     }
     if (msg.equals("Bugun")) {
       if (lastMessage.equals("O'qituvchi")) {
@@ -220,5 +228,32 @@ public class BotInitializer extends TelegramLongPollingBot {
       }
     }
   }
+  public void getImages(Long chat_id) {
+    String urls[] = new String[3];
+    urls[0] = "http://localhost:9000/map/1-floor";
+    urls[1] = "http://localhost:9000/map/2-floor";
+    urls[2] = "http://localhost:9000/map/3-floor";
+    for (int i = 0; i < 3; i++){
+      try {
+        new TestImage().capturePage(urls[i]);
+        sendImageFromUrl(chat_id);
+      }
+      catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public void sendImageFromUrl(Long chatId) {
+    SendPhoto sendPhotoRequest = new SendPhoto();
+    sendPhotoRequest.setChatId(chatId);
+    sendPhotoRequest.setPhoto(new File("/home/prince/IdeaProjects/timetable_bot/public/images/screenshot.png"));
+    try {
+      execute(sendPhotoRequest);
+    } catch (TelegramApiException e) {
+      e.printStackTrace();
+    }
+  }
+
 
 }

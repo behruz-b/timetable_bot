@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.*;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class Test {
 
@@ -25,8 +26,9 @@ public class Test {
 
     //Or Use WebDriverManager to setup the chromedriver like below
     WebDriverManager.chromedriver().setup();
-
-    driver = new ChromeDriver();
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--kiosk");
+    driver = new ChromeDriver(options);
 
     //Specify the targetted URL
     String testURL = "https://timetable-ubtuit.herokuapp.com/map/1-floor";
@@ -48,27 +50,5 @@ public class Test {
     {
       // this part is executed when an exception (in this example InterruptedException) occurs
     }
-  }
-
-
-  //Method to generate Random number based on DateTimeStamp
-  private static String generatetimeStampBasedRandomNumber() {
-
-    Date date = new Date();
-    long time = date.getTime();
-    Timestamp ts = new Timestamp(time);
-
-    String tst = ts.toString();
-
-    try {
-      tst = tst.substring(0, tst.length() - 4);
-      tst = tst.replace("-", "");
-      tst = tst.replace(" ", "");
-      tst = tst.replace(":", "");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    return tst;
   }
 }

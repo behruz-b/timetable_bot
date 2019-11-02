@@ -65,6 +65,9 @@ public class BotInitializer extends TelegramLongPollingBot {
   }
 
   public String getMessage(String msg) {
+    String tBotUser = new BotInitializer(botUserName, botToken, httpLink).botUserName;
+    String tBotToken = new BotInitializer(botUserName, botToken, httpLink).botToken;
+    String tHttpLink = new BotInitializer(botUserName, botToken, httpLink).httpLink;
     ArrayList<KeyboardRow> keyboard = new ArrayList<>();
     KeyboardRow keyboardFirstRow = new KeyboardRow();
     KeyboardRow keyboardSecondRow = new KeyboardRow();
@@ -187,7 +190,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return SendToServer.callApiAndSendMsg(request, new BotInitializer(botUserName, botToken, httpLink).httpLink);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        return "TIMETABLE";
       } else if (lastMessage.equals("O'quvchi/Bugun")) {
         request = lastMessage + "/" + msg;
         keyboard.clear();
@@ -195,7 +199,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return SendToServer.callApiAndSendMsg(request, new BotInitializer(botUserName, botToken, httpLink).httpLink);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        return "TIMETABLE";
 //
       } else if (lastMessage.equals("O'quvchi/Ertaga")) {
         request = lastMessage + "/" + msg;
@@ -204,7 +209,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return SendToServer.callApiAndSendMsg(request, new BotInitializer(botUserName, botToken, httpLink).httpLink);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        return "TIMETABLE";
 
       } else if (lastMessage.equals("O'quvchi/Haftalik")) {
         request = lastMessage + "/" + msg;
@@ -213,7 +219,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return SendToServer.callApiAndSendMsg(request, new BotInitializer(botUserName, botToken, httpLink).httpLink);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        return "TIMETABLE";
       } else if (lastMessage.equals("O'qituvchi/Haftalik")) {
         request = lastMessage + "/" + msg;
         keyboard.clear();
@@ -221,7 +228,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return SendToServer.callApiAndSendMsg(request, new BotInitializer(botUserName, botToken, httpLink).httpLink);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        return "TIMETABLE";
 
       } else {
         return "Menu tanlang";

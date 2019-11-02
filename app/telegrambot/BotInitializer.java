@@ -123,7 +123,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     }
     if (msg.equals("Bugun")) {
       if (lastMessage.equals("O'qituvchi")) {
-        lastMessage = lastMessage + "-" + msg;
+        lastMessage = lastMessage + "_" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -132,7 +132,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         return "O'qituvchi ismi...";
       } else if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "-" + msg;
+        lastMessage = lastMessage + "_" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -146,7 +146,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     }
     if (msg.equals("Ertaga")) {
       if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "-" + msg;
+        lastMessage = lastMessage + "_" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -160,7 +160,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     }
     if (msg.equals("Haftalik")) {
       if (lastMessage.equals("O'qituvchi")) {
-        lastMessage = lastMessage + "-" + msg;
+        lastMessage = lastMessage + "_" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -169,7 +169,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         return "O'qituvchi ismi...";
       } else if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "-" + msg;
+        lastMessage = lastMessage + "_" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -181,8 +181,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         return "Menu tanlang...";
       }
     } else {
-      if (lastMessage.equals("O'qituvchi-Bugun")) {
-        request = lastMessage + "-" + msg;
+      if (lastMessage.equals("O'qituvchi_Bugun")) {
+        request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -190,8 +190,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
         return "TIMETABLE";
-      } else if (lastMessage.equals("O'quvchi-Bugun")) {
-        request = lastMessage + "-" + msg;
+      } else if (lastMessage.equals("O'quvchi_Bugun")) {
+        request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -200,8 +200,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
         return "TIMETABLE";
 //
-      } else if (lastMessage.equals("O'quvchi-Ertaga")) {
-        request = lastMessage + "-" + msg;
+      } else if (lastMessage.equals("O'quvchi_Ertaga")) {
+        request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -210,8 +210,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
         return "TIMETABLE";
 
-      } else if (lastMessage.equals("O'quvchi-Haftalik")) {
-        request = lastMessage + "-" + msg;
+      } else if (lastMessage.equals("O'quvchi_Haftalik")) {
+        request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -219,8 +219,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
         return "TIMETABLE";
-      } else if (lastMessage.equals("O'qituvchi-Haftalik")) {
-        request = lastMessage + "-" + msg;
+      } else if (lastMessage.equals("O'qituvchi_Haftalik")) {
+        request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");

@@ -4,6 +4,8 @@ import scalaj.http.{Http, HttpOptions}
 
 object SendToServer {
   def callApiAndSendMsg(text: String, tBotUser: String, tBotToken: String, tHttpLink: String, chat_id: Long): Unit = {
+    println(s"tHttpLink: $tHttpLink")
+    println(s"text: $text")
     Http(tHttpLink + "/" + text)
       .header("Content-Type", "application/json")
       .header("Charset", "UTF-8")

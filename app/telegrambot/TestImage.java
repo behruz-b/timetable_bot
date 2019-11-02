@@ -21,16 +21,12 @@ public class TestImage {
     ChromeOptions options = new ChromeOptions();
     options.addArguments("--kiosk");
     driver = new ChromeDriver(options);
-
-    //Specify the targetted URL
-//    String testURL = "http://localhost:9000/map/1-floor";
-
     //Access the targetted URL
     driver.get(Url);
     try {
       Thread.sleep(100);
       final File screenShotOutputFile = new File("/tmp/screenshot.png").getAbsoluteFile();
-      File scrFile = ((TakesScreenshot) driver.findElement(By.id("html-page"))).getScreenshotAs(OutputType.FILE);
+      File scrFile = ((TakesScreenshot) driver.findElement(By.id("capture-border"))).getScreenshotAs(OutputType.FILE);
       FileUtils.copyFile(scrFile, screenShotOutputFile);
       System.out.println("Took Screenshot for " + Url + " saved at " + screenShotOutputFile);
 

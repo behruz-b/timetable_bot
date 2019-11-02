@@ -87,7 +87,7 @@ public class BotInitializer extends TelegramLongPollingBot {
       return "Menu tanlang...";
     }
     if (msg.equals("O'quvchi")) {
-      lastMessage = msg;
+      lastMessage = "student";
       request = "";
       keyboard.clear();
       keyboardFirstRow.clear();
@@ -101,7 +101,7 @@ public class BotInitializer extends TelegramLongPollingBot {
       return "Menu tanlang...";
     }
     if (msg.equals("O'qituvchi")) {
-      lastMessage = msg;
+      lastMessage = "teacher";
       request = "";
       keyboard.clear();
       keyboardFirstRow.clear();
@@ -116,14 +116,14 @@ public class BotInitializer extends TelegramLongPollingBot {
     if (msg.equals("Bo'sh xonalar")) {
       lastMessage = "";
       keyboard.clear();
-      request = msg;
+      request = "";
       keyboardFirstRow.clear();
       getImages(chat_id);
       return "Hozirda bo'sh xonalar";
     }
     if (msg.equals("Bugun")) {
-      if (lastMessage.equals("O'qituvchi")) {
-        lastMessage = lastMessage + "_" + msg;
+      if (lastMessage.equals("teacher")) {
+        lastMessage = lastMessage + "_" + "today";
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -131,8 +131,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return "O'qituvchi ismi...";
-      } else if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "_" + msg;
+      } else if (lastMessage.equals("student")) {
+        lastMessage = lastMessage + "_" + "today";
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -145,8 +145,8 @@ public class BotInitializer extends TelegramLongPollingBot {
       }
     }
     if (msg.equals("Ertaga")) {
-      if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "_" + msg;
+      if (lastMessage.equals("student")) {
+        lastMessage = lastMessage + "_" + "tomorrow";
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -159,8 +159,8 @@ public class BotInitializer extends TelegramLongPollingBot {
       }
     }
     if (msg.equals("Haftalik")) {
-      if (lastMessage.equals("O'qituvchi")) {
-        lastMessage = lastMessage + "_" + msg;
+      if (lastMessage.equals("teacher")) {
+        lastMessage = lastMessage + "_" + "week";
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -168,8 +168,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
         return "O'qituvchi ismi...";
-      } else if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "_" + msg;
+      } else if (lastMessage.equals("student")) {
+        lastMessage = lastMessage + "_" + "week";
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -181,52 +181,52 @@ public class BotInitializer extends TelegramLongPollingBot {
         return "Menu tanlang...";
       }
     } else {
-      if (lastMessage.equals("O'qituvchi_Bugun")) {
+      if (lastMessage.equals("teacher_today")) {
         request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "today/teacher", chat_id);
         return "TIMETABLE";
-      } else if (lastMessage.equals("O'quvchi_Bugun")) {
+      } else if (lastMessage.equals("student_today")) {
         request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "today/student", chat_id);
         return "TIMETABLE";
 //
-      } else if (lastMessage.equals("O'quvchi_Ertaga")) {
+      } else if (lastMessage.equals("student_tomorrow")) {
         request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "tomorrow/student", chat_id);
         return "TIMETABLE";
 
-      } else if (lastMessage.equals("O'quvchi_Haftalik")) {
+      } else if (lastMessage.equals("student_week")) {
         request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "week/student", chat_id);
         return "TIMETABLE";
-      } else if (lastMessage.equals("O'qituvchi_Haftalik")) {
+      } else if (lastMessage.equals("teacher_week")) {
         request = lastMessage + "_" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
+        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "week/teacher", chat_id);
         return "TIMETABLE";
 
       } else {

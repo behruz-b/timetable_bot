@@ -253,7 +253,7 @@ public class BotInitializer extends TelegramLongPollingBot {
   public void sendImageFromUrl(Long chatId) {
     SendPhoto sendPhotoRequest = new SendPhoto();
     sendPhotoRequest.setChatId(chatId);
-    sendPhotoRequest.setPhoto(new File("/home/prince/IdeaProjects/timetable_bot/public/images/screenshot.png"));
+    sendPhotoRequest.setPhoto(new File("/tmp/screenshot.png"));
     try {
       execute(sendPhotoRequest);
     } catch (TelegramApiException e) {

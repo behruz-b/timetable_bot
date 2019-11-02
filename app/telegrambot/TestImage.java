@@ -29,7 +29,7 @@ public class TestImage {
     driver.get(Url);
     try {
       Thread.sleep(100);
-      final File screenShotOutputFile = new File("/home/prince/IdeaProjects/timetable_bot/public/images/screenshot.png").getAbsoluteFile();
+      final File screenShotOutputFile = new File("/tmp/screenshot.png").getAbsoluteFile();
       File scrFile = ((TakesScreenshot) driver.findElement(By.id("html-page"))).getScreenshotAs(OutputType.FILE);
       FileUtils.copyFile(scrFile, screenShotOutputFile);
       System.out.println("Took Screenshot for " + Url + " saved at " + screenShotOutputFile);

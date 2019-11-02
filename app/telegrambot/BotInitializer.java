@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 public class BotInitializer extends TelegramLongPollingBot {
 
   private final String botUserName;
@@ -35,12 +37,13 @@ public class BotInitializer extends TelegramLongPollingBot {
 
     // We check if the update has a message and the message has text
     if (update.hasMessage() && update.getMessage().hasText()) {
-
       update.getUpdateId();
       SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
 
       chat_id = update.getMessage().getChatId();
       String message_text = update.getMessage().getText();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
       message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
 
       try {

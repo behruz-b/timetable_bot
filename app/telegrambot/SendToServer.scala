@@ -1,13 +1,10 @@
 package telegrambot
 
-import play.api.libs.json.Json
-import protocols.TimetableProtocol.Group
 import scalaj.http.{Http, HttpOptions}
 
 object SendToServer {
   def callApiAndSendMsg(text: String, tBotUser: String, tBotToken: String, tHttpLink: String, chat_id: Long): Unit = {
-    val data = Json.toJson(Group(text))
-    Http(tHttpLink).postData(Json.stringify(data))
+    Http(tHttpLink + text)
       .header("Content-Type", "application/json")
       .header("Charset", "UTF-8")
       .option(HttpOptions.readTimeout(10000)).asString.body.mkString("")

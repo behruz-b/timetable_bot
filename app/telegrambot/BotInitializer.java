@@ -1,4 +1,5 @@
 package telegrambot;
+
 import org.openqa.selenium.WebDriver;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -10,10 +11,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 public class BotInitializer extends TelegramLongPollingBot {
 
@@ -125,7 +123,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     }
     if (msg.equals("Bugun")) {
       if (lastMessage.equals("O'qituvchi")) {
-        lastMessage = lastMessage + "/" + msg;
+        lastMessage = lastMessage + "-" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -134,7 +132,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         return "O'qituvchi ismi...";
       } else if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "/" + msg;
+        lastMessage = lastMessage + "-" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -148,7 +146,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     }
     if (msg.equals("Ertaga")) {
       if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "/" + msg;
+        lastMessage = lastMessage + "-" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -162,7 +160,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     }
     if (msg.equals("Haftalik")) {
       if (lastMessage.equals("O'qituvchi")) {
-        lastMessage = lastMessage + "/" + msg;
+        lastMessage = lastMessage + "-" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -171,7 +169,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         return "O'qituvchi ismi...";
       } else if (lastMessage.equals("O'quvchi")) {
-        lastMessage = lastMessage + "/" + msg;
+        lastMessage = lastMessage + "-" + msg;
         request = "";
         keyboard.clear();
         keyboardFirstRow.clear();
@@ -183,8 +181,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         return "Menu tanlang...";
       }
     } else {
-      if (lastMessage.equals("O'qituvchi/Bugun")) {
-        request = lastMessage + "/" + msg;
+      if (lastMessage.equals("O'qituvchi-Bugun")) {
+        request = lastMessage + "-" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -192,8 +190,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
         return "TIMETABLE";
-      } else if (lastMessage.equals("O'quvchi/Bugun")) {
-        request = lastMessage + "/" + msg;
+      } else if (lastMessage.equals("O'quvchi-Bugun")) {
+        request = lastMessage + "-" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -202,8 +200,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
         return "TIMETABLE";
 //
-      } else if (lastMessage.equals("O'quvchi/Ertaga")) {
-        request = lastMessage + "/" + msg;
+      } else if (lastMessage.equals("O'quvchi-Ertaga")) {
+        request = lastMessage + "-" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -212,8 +210,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
         return "TIMETABLE";
 
-      } else if (lastMessage.equals("O'quvchi/Haftalik")) {
-        request = lastMessage + "/" + msg;
+      } else if (lastMessage.equals("O'quvchi-Haftalik")) {
+        request = lastMessage + "-" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -221,8 +219,8 @@ public class BotInitializer extends TelegramLongPollingBot {
         replyKeyboardMarkup.setKeyboard(keyboard);
         SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink, chat_id);
         return "TIMETABLE";
-      } else if (lastMessage.equals("O'qituvchi/Haftalik")) {
-        request = lastMessage + "/" + msg;
+      } else if (lastMessage.equals("O'qituvchi-Haftalik")) {
+        request = lastMessage + "-" + msg;
         keyboard.clear();
         keyboardFirstRow.clear();
         keyboardFirstRow.add("Menu");
@@ -236,17 +234,17 @@ public class BotInitializer extends TelegramLongPollingBot {
       }
     }
   }
+
   public void getImages(Long chat_id) {
     String urls[] = new String[3];
     urls[0] = "http://localhost:9000/map/1-floor";
     urls[1] = "http://localhost:9000/map/2-floor";
     urls[2] = "http://localhost:9000/map/3-floor";
-    for (int i = 0; i < 3; i++){
+    for (int i = 0; i < 3; i++) {
       try {
         new TestImage().capturePage(urls[i]);
         sendImageFromUrl(chat_id);
-      }
-      catch (IOException e) {
+      } catch (IOException e) {
         e.printStackTrace();
       }
     }

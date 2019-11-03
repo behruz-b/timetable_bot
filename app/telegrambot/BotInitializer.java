@@ -191,8 +191,12 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "today/teacher", chat_id);
-        return "TIMETABLE";
+        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+          return "bugun " + msg + " ismli o'qituvchini darsi yo'q";
+        }else {
+          SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "today/teacher", chat_id);
+          return "TIMETABLE";
+        }
       } else if (lastMessage.equals("student_today")) {
         request = lastMessage + "_" + msg;
         keyboard.clear();
@@ -200,8 +204,12 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "today/student", chat_id);
-        return "TIMETABLE";
+        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+          return "bugun " + msg + " nomli guruhga dars yo'q";
+        }else {
+          SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "today/student", chat_id);
+          return "TIMETABLE";
+        }
 //
       } else if (lastMessage.equals("student_tomorrow")) {
         request = lastMessage + "_" + msg;
@@ -210,9 +218,12 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "tomorrow/student", chat_id);
-        return "TIMETABLE";
-
+        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+          return "ertaga " + msg + " nomli guruhga dars yo'q";
+        }else {
+          SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "tomorrow/student", chat_id);
+          return "TIMETABLE";
+        }
       } else if (lastMessage.equals("student_week")) {
         request = lastMessage + "_" + msg;
         keyboard.clear();
@@ -220,8 +231,12 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "week/student", chat_id);
-        return "TIMETABLE";
+        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+          return msg + " nomli guruh yo'q";
+        }else {
+          SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "week/student", chat_id);
+          return "TIMETABLE";
+        }
       } else if (lastMessage.equals("teacher_week")) {
         request = lastMessage + "_" + msg;
         keyboard.clear();
@@ -229,8 +244,12 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "week/teacher", chat_id);
-        return "TIMETABLE";
+        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+          return msg + " ismli o'qituvchi yo'q";
+        }else {
+          SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "week/teacher", chat_id);
+          return "TIMETABLE";
+        }
 
       } else {
         return "Menu tanlang";

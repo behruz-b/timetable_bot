@@ -65,7 +65,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     return new BotInitializer(botUserName, botToken, httpLink).botToken;
   }
 
-  public String getMessage(String msg) {
+  private String getMessage(String msg) {
     String tBotUser = new BotInitializer(botUserName, botToken, httpLink).botUserName;
     String tBotToken = new BotInitializer(botUserName, botToken, httpLink).botToken;
     String tHttpLink = new BotInitializer(botUserName, botToken, httpLink).httpLink;
@@ -191,7 +191,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+        if (SendToServer.checkingResponse(tHttpLink + "text", request).equals("No")) {
           return "bugun " + msg + " ismli o'qituvchini darsi yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "today/teacher", chat_id);
@@ -204,7 +204,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+        if (SendToServer.checkingResponse(tHttpLink + "text", request).equals("No")) {
           return "bugun " + msg + " nomli guruhga dars yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "today/student", chat_id);
@@ -218,7 +218,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+        if (SendToServer.checkingResponse(tHttpLink + "text", request).equals("No")) {
           return "ertaga " + msg + " nomli guruhga dars yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "tomorrow/student", chat_id);
@@ -231,7 +231,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+        if (SendToServer.checkingResponse(tHttpLink + "text", request).equals("No")) {
           return msg + " nomli guruh yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "week/student", chat_id);
@@ -244,7 +244,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        if (SendToServer.checkingResponse("http://localhost:9000/text", request).equals("No")) {
+        if (SendToServer.checkingResponse(tHttpLink + "text", request).equals("No")) {
           return msg + " ismli o'qituvchi yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "week/teacher", chat_id);
@@ -258,10 +258,12 @@ public class BotInitializer extends TelegramLongPollingBot {
   }
 
   public void getImages(Long chat_id) {
+    String tHttpLink = new BotInitializer(botUserName, botToken, httpLink).httpLink;
+
     String urls[] = new String[3];
-    urls[0] = "http://localhost:9000/map/1-floor";
-    urls[1] = "http://localhost:9000/map/2-floor";
-    urls[2] = "http://localhost:9000/map/3-floor";
+    urls[0] = tHttpLink + "map/1-floor";
+    urls[1] = tHttpLink + "map/2-floor";
+    urls[2] = tHttpLink + "map/3-floor";
     for (int i = 0; i < 3; i++) {
       try {
         new TestImage().capturePage(urls[i]);

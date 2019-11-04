@@ -2,6 +2,7 @@ package telegrambot;
 
 import org.openqa.selenium.WebDriver;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -87,7 +88,7 @@ public class BotInitializer extends TelegramLongPollingBot {
       keyboard.add(keyboardFirstRow);
       keyboard.add(keyboardSecondRow);
       replyKeyboardMarkup.setKeyboard(keyboard);
-      return "Menu tanlang...";
+      return "Menu tanlang!";
     }
     if (msg.equals("O'quvchi")) {
       lastMessage = "student";
@@ -101,7 +102,7 @@ public class BotInitializer extends TelegramLongPollingBot {
       keyboard.add(keyboardFirstRow);
       keyboard.add(keyboardSecondRow);
       replyKeyboardMarkup.setKeyboard(keyboard);
-      return "Menu tanlang...";
+      return "Menu tanlang!";
     }
     if (msg.equals("O'qituvchi")) {
       lastMessage = "teacher";
@@ -114,7 +115,7 @@ public class BotInitializer extends TelegramLongPollingBot {
       keyboard.add(keyboardFirstRow);
       keyboard.add(keyboardSecondRow);
       replyKeyboardMarkup.setKeyboard(keyboard);
-      return "Menu tanlang...";
+      return "Menu tanlang!";
     }
     if (msg.equals("Bo'sh xonalar")) {
       lastMessage = "";
@@ -133,7 +134,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return "O'qituvchi ismi...";
+        return "O'qituvchi ismi sharifini kiriting.";
       } else if (lastMessage.equals("student")) {
         lastMessage = lastMessage + "_" + "today";
         request = "";
@@ -142,7 +143,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return "Guruh raqami...";
+        return "Guruh raqamini kiriting.";
       } else {
         return "Menu tanlang...";
       }
@@ -156,7 +157,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return "Guruh raqami...";
+        return "Guruh raqamini kiriting.";
       } else {
         return "Menu tanlang...";
       }
@@ -170,7 +171,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return "O'qituvchi ismi...";
+        return "O'qituvchi ismi sharifini kiriting.";
       } else if (lastMessage.equals("student")) {
         lastMessage = lastMessage + "_" + "week";
         request = "";
@@ -179,7 +180,7 @@ public class BotInitializer extends TelegramLongPollingBot {
         keyboardFirstRow.add("Menu");
         keyboard.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboard);
-        return "Guruh raqami...";
+        return "Guruh raqamini kiriting.";
       } else {
         return "Menu tanlang...";
       }
@@ -195,7 +196,7 @@ public class BotInitializer extends TelegramLongPollingBot {
           return "bugun " + msg + " ismli o'qituvchini darsi yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "today/teacher", chat_id);
-          return "TIMETABLE";
+          return "O'qituvchi ismi sharifini kiriting.";
         }
       } else if (lastMessage.equals("student_today")) {
         request = lastMessage + "_" + msg;
@@ -208,7 +209,7 @@ public class BotInitializer extends TelegramLongPollingBot {
           return "bugun " + msg + " nomli guruhga dars yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink + "today/student", chat_id);
-          return "TIMETABLE";
+          return "Guruh raqamini kiriting!";
         }
 //
       } else if (lastMessage.equals("student_tomorrow")) {
@@ -222,7 +223,7 @@ public class BotInitializer extends TelegramLongPollingBot {
           return "ertaga " + msg + " nomli guruhga dars yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "tomorrow/student", chat_id);
-          return "TIMETABLE";
+          return "Guruh raqamini kiriting!";
         }
       } else if (lastMessage.equals("student_week")) {
         request = lastMessage + "_" + msg;
@@ -235,7 +236,7 @@ public class BotInitializer extends TelegramLongPollingBot {
           return msg + " nomli guruh yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "week/student", chat_id);
-          return "TIMETABLE";
+          return "Guruh raqamini kiriting!";
         }
       } else if (lastMessage.equals("teacher_week")) {
         request = lastMessage + "_" + msg;
@@ -248,7 +249,7 @@ public class BotInitializer extends TelegramLongPollingBot {
           return msg + " ismli o'qituvchi yo'q";
         }else {
           SendToServer.callApiAndSendMsg(request, tBotUser, tBotToken, tHttpLink  + "week/teacher", chat_id);
-          return "TIMETABLE";
+          return "O'qituvchi ismi sharifini kiriting.";
         }
 
       } else {
@@ -280,6 +281,17 @@ public class BotInitializer extends TelegramLongPollingBot {
     sendPhotoRequest.setPhoto(new File("/tmp/screenshot.png"));
     try {
       execute(sendPhotoRequest);
+    } catch (TelegramApiException e) {
+      e.printStackTrace();
+    }
+  }
+  public void sendFileFromUrl(Long chatId) {
+    SendDocument sendDocumentRequest = new SendDocument();
+    sendDocumentRequest.setChatId(chatId);
+    sendDocumentRequest.setCaption("Haftalik dars jadvali");
+    sendDocumentRequest.setDocument(new File("/tmp/screenshot.png"));
+    try {
+      execute(sendDocumentRequest);
     } catch (TelegramApiException e) {
       e.printStackTrace();
     }

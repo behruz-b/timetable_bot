@@ -12,7 +12,12 @@ object SendToServer {
       .option(HttpOptions.readTimeout(10000)).asString.body.mkString("")
     try {
         new TestImage().capturePage(tHttpLink + "/" + text)
-        new BotInitializer(tBotUser, tBotToken, tHttpLink).sendImageFromUrl(chat_id)
+        val when = text.toString.split("_").toList.reverse.tail.head
+        if (when == "week"){
+          new BotInitializer(tBotUser, tBotToken, tHttpLink).sendFileFromUrl(chat_id)
+        }else {
+          new BotInitializer(tBotUser, tBotToken, tHttpLink).sendImageFromUrl(chat_id)
+        }
     } catch {
       case e: Throwable =>
         e.printStackTrace

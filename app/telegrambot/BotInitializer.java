@@ -5,6 +5,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.Audio;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
@@ -36,11 +37,138 @@ public class BotInitializer extends TelegramLongPollingBot {
   @Override
   public void onUpdateReceived(Update update) {
 
-    // We check if the update has a message and the message has text
-    if (update.hasMessage() && update.getMessage().hasText()) {
+    if (update.hasMessage() && update.getMessage().hasPhoto()) {
       update.getUpdateId();
       SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
+      chat_id = update.getMessage().getChatId();
+      Audio message_text = update.getMessage().getAudio();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
+      message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
 
+      try {
+        message.setText("Siz yuborgan suratni yaratuvchim albatta ko'radi. Mendan foydalanganingiz uchun raxmat");
+        execute(message); // Sending our message object to user
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    // We check if the update has a message and the message has text
+    else if (update.hasMessage() && update.getMessage().hasAudio()) {
+      update.getUpdateId();
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
+      chat_id = update.getMessage().getChatId();
+      Audio message_text = update.getMessage().getAudio();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
+      message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
+
+      try {
+        message.setText("Siz yuborgan audio xabarga ertaga javob yuboramiz!");
+        execute(message); // Sending our message object to user
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    else if (update.hasMessage() && update.getMessage().hasVoice()) {
+      update.getUpdateId();
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
+      chat_id = update.getMessage().getChatId();
+      Audio message_text = update.getMessage().getAudio();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
+      message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
+
+      try {
+        message.setText("Siz yuborgan audio xabarga ertaga javob yuboramiz!");
+        execute(message); // Sending our message object to user
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    else if (update.hasMessage() && update.getMessage().hasDocument()) {
+      update.getUpdateId();
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
+      chat_id = update.getMessage().getChatId();
+      Audio message_text = update.getMessage().getAudio();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
+      message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
+
+      try {
+        message.setText("Siz yuborgan faylni yaratuchim albatta tekshiradi. Mendan foydalanganingiz uchun raxmat");
+        execute(message); // Sending our message object to user
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    else if (update.hasMessage() && update.getMessage().hasAnimation()) {
+      update.getUpdateId();
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
+      chat_id = update.getMessage().getChatId();
+      Audio message_text = update.getMessage().getAudio();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
+      message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
+
+      try {
+        message.setText("Yuborgan animatsiyangiz uchun raxmat");
+        execute(message); // Sending our message object to user
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    else if (update.hasMessage() && update.getMessage().hasContact()) {
+      update.getUpdateId();
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
+      chat_id = update.getMessage().getChatId();
+      Audio message_text = update.getMessage().getAudio();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
+      message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
+
+      try {
+        message.setText("Shu abanent bilan albatta bog'lanamiz");
+        execute(message); // Sending our message object to user
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    else if (update.hasMessage() && update.getMessage().hasVideo()) {
+      update.getUpdateId();
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
+      chat_id = update.getMessage().getChatId();
+      Audio message_text = update.getMessage().getAudio();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
+      message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
+
+      try {
+        message.setText("Video uchun raxmat");
+        execute(message); // Sending our message object to user
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    else if (update.hasMessage() && update.getMessage().hasLocation()) {
+      update.getUpdateId();
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
+      chat_id = update.getMessage().getChatId();
+      Audio message_text = update.getMessage().getAudio();
+      String username = update.getMessage().getChat().getUserName();
+      log.println("=============== getUserName:  " + username +  ": " + message_text +" ================");
+      message.setReplyMarkup(replyKeyboardMarkup);// Create a message object object
+
+      try {
+        message.setText("Qayerdasiz?");
+        execute(message); // Sending our message object to user
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    else {
+      update.getUpdateId();
+      SendMessage message = new SendMessage().setParseMode("HTML").setChatId(update.getMessage().getChatId());
       chat_id = update.getMessage().getChatId();
       String message_text = update.getMessage().getText();
       String username = update.getMessage().getChat().getUserName();
@@ -258,7 +386,7 @@ public class BotInitializer extends TelegramLongPollingBot {
     }
   }
 
-  public void getImages(Long chat_id) {
+  private void getImages(Long chat_id) {
     String tHttpLink = new BotInitializer(botUserName, botToken, httpLink).httpLink;
 
     String urls[] = new String[3];
